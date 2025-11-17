@@ -1,0 +1,29 @@
+<Project Sdk="Microsoft.NET.Sdk.Web">
+
+	<PropertyGroup>
+		<TargetFramework>net8.0</TargetFramework>
+		<Nullable>enable</Nullable>
+		<ImplicitUsings>enable</ImplicitUsings>
+	</PropertyGroup>
+
+	<ItemGroup>
+		<!-- Pacotes principais do .NET e Swagger -->
+		<PackageReference Include="Microsoft.AspNetCore.OpenApi" Version="8.0.0" />
+		<PackageReference Include="Swashbuckle.AspNetCore" Version="6.4.0" />
+
+		<!-- Pacotes do Entity Framework Core -->
+		<PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="8.0.0" />
+		<PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="8.0.0">
+			<PrivateAssets>all</PrivateAssets>
+			<IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+		</PackageReference>
+
+		<!-- Pacote de Versionamento de API -->
+		<PackageReference Include="Asp.Versioning.Mvc.ApiExplorer" Version="8.1.0" />
+
+		<!-- Pacotes de Autenticação (JWT e BCrypt) -->
+		<PackageReference Include="Microsoft.AspNetCore.Authentication.JwtBearer" Version="8.0.0" />
+		<PackageReference Include="BCrypt.Net-Next" Version="4.0.3" />
+	</ItemGroup>
+
+</Project>
