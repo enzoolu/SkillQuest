@@ -158,6 +158,94 @@ Aceda à documentação interativa no seu navegador:
 URL: https://localhost:5001/swagger (ou a porta indicada no terminal)
 
 ---
+
+## 🏗️ Arquitetura e Diagramas
+O projeto segue uma Arquitetura Orientada a Serviços (SOA) modular, onde a API serve como o gateway central que orquestra serviços de negócio independentes.
+
+### Diagrama de Arquitetura de Serviços (SOA)
+Este diagrama ilustra o fluxo de alto nível, desde o cliente até a base de dados, passando pelas camadas de lógica de negócio e autenticação.
+
+```mermaid
+graph TD
+    A[Cliente / Swagger / Frontend] --> B(Controllers / API Gateway);
+    B --> C{Middleware / Auth JWT / Exceptions};
+    C --> D(Camada de Serviços SOA);
+    D --> E[Camada de Repositórios / Dados];
+    E --> F[(SQL Server DB)];
+```
+
+### Diagrama UML de Entidades (Classes Principais)
+Este diagrama mostra as 5 entidades principais do domínio, o Value Object `Email`, e como elas se relacionam dentro do `SkillQuestDbContext`.
+
+```mermaid
+classDiagram
+    direction LR
+
+    class Usuario {
+        +int Id
+        +string Username
+        +Email Email
+        +string Role
+        +int Pontos
+        +string Medalhas
+    }
+
+    class Email {
+        <<ValueObject>>
+        +string Address
+    }
+
+    class Trilha {
+        +int Id
+        +string Nome
+        +string Categoria
+        +string Nivel
+    }
+
+    class Missao {
+        +int Id
+        +string Nome
+        +int XP
+        +int IdTrilha
+    }
+
+    class Recompensa {
+        +int Id
+        +string Nome
+        +string Tipo
+        +int PontosNecessarios
+    }
+
+    class ProgressoUsuario {
+        <<TabelaDeJuncao>>
+        +int IdUsuario
+        +int IdMissao
+        +string Status
+        +DateTime DataConclusao
+    }
+    
+    Usuario "1" -- "1" Email : possui
+    Trilha "1" -- "N" Missao : contém
+    Usuario "1" -- "N" ProgressoUsuario : tem
+    Missao "1" -- "N" ProgressoUsuario : é parte de
+
+    class SkillQuestDbContext {
+        +DbSet<Usuario> Usuarios
+        +DbSet<Trilha> Trilhas
+        +DbSet<Missao> Missoes
+        +DbSet<Recompensa> Recompensas
+        +DbSet<ProgressoUsuario> ProgressosUsuarios
+    }
+
+    SkillQuestDbContext "1" -- "N" Usuario : gerencia
+    SkillQuestDbContext "1" -- "N" Trilha : gerencia
+    SkillQuestDbContext "1" -- "N" Missao : gerencia
+    SkillQuestDbContext "1" -- "N" Recompensa : gerencia
+    SkillQuestDbContext "1" -- "N" ProgressoUsuario : gerencia
+```
+
+---
+
 ## 📌 Diagrama de Fluxo da Aplicação
 
 Legenda:
