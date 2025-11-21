@@ -1,6 +1,11 @@
 using SkillQuest.Api.DTOs;
 using SkillQuest.Api.Models;
+using SkillQuest.Api.Models.Enums;
 using SkillQuest.Api.Repositories;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
 
 namespace SkillQuest.Api.Services
 {
@@ -15,12 +20,17 @@ namespace SkillQuest.Api.Services
 
         public async Task<TrilhaDto> CreateAsync(CreateTrilhaDto createDto)
         {
+            if (!Enum.TryParse<NivelTrilha>(createDto.Nivel, true, out var nivelEnum))
+            {
+                nivelEnum = NivelTrilha.Iniciante;
+            }
+
             var trilha = new Trilha
             {
                 Nome = createDto.Nome,
                 Descricao = createDto.Descricao,
                 Categoria = createDto.Categoria,
-                Nivel = createDto.Nivel
+                Nivel = nivelEnum
             };
 
             var newTrilha = await _trilhaRepository.AddAsync(trilha);
@@ -56,7 +66,11 @@ namespace SkillQuest.Api.Services
             trilha.Nome = updateDto.Nome;
             trilha.Descricao = updateDto.Descricao;
             trilha.Categoria = updateDto.Categoria;
-            trilha.Nivel = updateDto.Nivel;
+
+            if (Enum.TryParse<NivelTrilha>(updateDto.Nivel, true, out var nivelEnum))
+            {
+                trilha.Nivel = nivelEnum;
+            }
 
             await _trilhaRepository.UpdateAsync(trilha);
             return MapToDto(trilha);
@@ -70,7 +84,7 @@ namespace SkillQuest.Api.Services
                 Nome = trilha.Nome,
                 Descricao = trilha.Descricao,
                 Categoria = trilha.Categoria,
-                Nivel = trilha.Nivel
+                Nivel = trilha.Nivel.ToString()
             };
         }
     }

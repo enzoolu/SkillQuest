@@ -1,3 +1,6 @@
+using SkillQuest.Api.Models.Enums;
+using System.Collections.Generic;
+
 namespace SkillQuest.Api.Models
 {
     public class Trilha
@@ -6,7 +9,8 @@ namespace SkillQuest.Api.Models
         public string Nome { get; set; } = string.Empty;
         public string Descricao { get; set; } = string.Empty;
         public string Categoria { get; set; } = string.Empty;
-        public string Nivel { get; set; } = string.Empty;
+
+        public NivelTrilha Nivel { get; set; }
 
         public ICollection<Missao> Missoes { get; set; } = new List<Missao>();
     }

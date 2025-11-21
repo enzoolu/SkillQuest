@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using SkillQuest.Api.Repositories;
 
@@ -11,9 +12,11 @@ using SkillQuest.Api.Repositories;
 namespace SkillQuest.Api.Migrations
 {
     [DbContext(typeof(SkillQuestDbContext))]
-    partial class SkillQuestDbContextModelSnapshot : ModelSnapshot
+    [Migration("20251121190209_ChangeNivelToEnum")]
+    partial class ChangeNivelToEnum
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder

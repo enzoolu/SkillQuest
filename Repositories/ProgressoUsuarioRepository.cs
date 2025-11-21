@@ -9,7 +9,11 @@ namespace SkillQuest.Api.Repositories
     public class ProgressoUsuarioRepository : IProgressoUsuarioRepository
     {
         private readonly SkillQuestDbContext _context;
-        public ProgressoUsuarioRepository(SkillQuestDbContext context) { _context dotnet build= context; }
+
+        public ProgressoUsuarioRepository(SkillQuestDbContext context)
+        {
+            _context = context;
+        }
 
         public async Task<ProgressoUsuario> AddAsync(ProgressoUsuario progresso)
         {
@@ -19,8 +23,7 @@ namespace SkillQuest.Api.Repositories
 
         public async Task<ProgressoUsuario?> GetByIdAsync(int idUsuario, int idMissao)
         {
-            return await _context.ProgressosUsuarios
-                .FindAsync(idUsuario, idMissao);
+            return await _context.ProgressosUsuarios.FindAsync(idUsuario, idMissao);
         }
 
         public async Task<IEnumerable<ProgressoUsuario>> GetProgressosByUsuarioAsync(int idUsuario)
