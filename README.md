@@ -371,7 +371,7 @@ POST /api/v1/recompensas/{id}/resgatar -> [Gateway API: RecompensasController]
 ## 🎥 Vídeo de Demonstração
 Assista a uma demonstração do fluxo completo da API, mostrando o Admin a criar conteúdo e o Aluno a executar a gamificação.
 
-👉 [LINK DO YOUTUBE SERÁ ADICIONADO AQUI]
+👉 LINK DO YOUTUBE: https://youtu.be/TY30gvCi-y8
 
 ---
 
